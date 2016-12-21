@@ -157,6 +157,7 @@ SWIFT_PROTOCOL("_TtP23CloudCherryiOSFramework23FloatRatingViewDelegate_")
 - (void)floatRatingView:(FloatRatingView * _Nonnull)ratingView isUpdating:(float)rating;
 @end
 
+@class NSDictionary;
 @class UIViewController;
 
 SWIFT_CLASS("_TtC23CloudCherryiOSFramework8SurveyCC")
@@ -173,6 +174,7 @@ SWIFT_CLASS("_TtC23CloudCherryiOSFramework8SurveyCC")
 ///
 /// \param iStaticToken Static Token for authentication
 - (void)setStaticToken:(NSString * _Nonnull)iStaticToken;
+- (NSArray<NSDictionary *> * _Nullable)getAnalyticsDataAfterTestFinish;
 
 /// Sets prefill details. This method is optional
 ///
