@@ -27,10 +27,8 @@ class CCAppDelegate: UIResponder, UIApplicationDelegate {
         
         // Setting White Status Bar
         
-        
         UIApplication.sharedApplication().setStatusBarStyle(.LightContent, animated: false)
 
-        
         return true
     }
 

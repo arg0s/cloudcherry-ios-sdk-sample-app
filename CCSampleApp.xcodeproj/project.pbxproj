@@ -14,8 +14,9 @@
 		C985C0681D93A3BD0062469A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C985C0621D93A3BD0062469A /* LaunchScreen.storyboard */; };
 		C985C0691D93A3BD0062469A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C985C0641D93A3BD0062469A /* Main.storyboard */; };
 		C985C06A1D93A3BD0062469A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C985C0671D93A3BD0062469A /* Assets.xcassets */; };
-		C992C51D1D9EAB680088A838 /* CloudCherryiOSFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C992C51C1D9EAB680088A838 /* CloudCherryiOSFramework.framework */; };
-		C992C5211D9EAB7E0088A838 /* CloudCherryiOSFramework.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C992C51C1D9EAB680088A838 /* CloudCherryiOSFramework.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		D34BED0B1DFFF0E6000D6764 /* CloudCherryiOSFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D34BED0A1DFFF0E6000D6764 /* CloudCherryiOSFramework.framework */; };
+		D34BED0C1DFFF175000D6764 /* CloudCherryiOSFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D34BED0A1DFFF0E6000D6764 /* CloudCherryiOSFramework.framework */; };
+		D34BED0D1DFFF175000D6764 /* CloudCherryiOSFramework.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D34BED0A1DFFF0E6000D6764 /* CloudCherryiOSFramework.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -42,7 +43,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				C992C5211D9EAB7E0088A838 /* CloudCherryiOSFramework.framework in Embed Frameworks */,
+				D34BED0D1DFFF175000D6764 /* CloudCherryiOSFramework.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -63,8 +64,8 @@
 		C985C0631D93A3BD0062469A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C985C0651D93A3BD0062469A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		C985C0671D93A3BD0062469A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		C992C51C1D9EAB680088A838 /* CloudCherryiOSFramework.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = CloudCherryiOSFramework.framework; sourceTree = "<group>"; };
 		C9D6F0861D951B7000BE8273 /* CCSampleApp-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CCSampleApp-Bridging-Header.h"; sourceTree = "<group>"; };
+		D34BED0A1DFFF0E6000D6764 /* CloudCherryiOSFramework.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = CloudCherryiOSFramework.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,7 +73,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C992C51D1D9EAB680088A838 /* CloudCherryiOSFramework.framework in Frameworks */,
+				D34BED0B1DFFF0E6000D6764 /* CloudCherryiOSFramework.framework in Frameworks */,
+				D34BED0C1DFFF175000D6764 /* CloudCherryiOSFramework.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -197,7 +199,7 @@
 		C9D6F0821D951B1300BE8273 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				C992C51C1D9EAB680088A838 /* CloudCherryiOSFramework.framework */,
+				D34BED0A1DFFF0E6000D6764 /* CloudCherryiOSFramework.framework */,
 			);
 			path = Frameworks;
 			sourceTree = "<group>";
@@ -503,13 +505,14 @@
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/CCSampleApp/Frameworks/**",
 					"$(PROJECT_DIR)/CCSampleApp/Frameworks",
+					"$(PROJECT_DIR)/CCSampleApp/Resources",
 				);
 				INFOPLIST_FILE = CCSampleApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.wow.CCSampleApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "3039703f-419d-42c2-a6a2-ddacb2296641";
+				PROVISIONING_PROFILE = "8cea22e2-07f3-46f6-8b7b-4121882b432f";
 				SWIFT_OBJC_BRIDGING_HEADER = "CCSampleApp/Utilities/CCSampleApp-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -521,18 +524,21 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)/**",
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/CCSampleApp/Frameworks/**",
 					"$(PROJECT_DIR)/CCSampleApp/Frameworks",
+					"$(PROJECT_DIR)/CCSampleApp/Resources",
 				);
 				INFOPLIST_FILE = CCSampleApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.wow.CCSampleApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "8cea22e2-07f3-46f6-8b7b-4121882b432f";
 				SWIFT_OBJC_BRIDGING_HEADER = "CCSampleApp/Utilities/CCSampleApp-Bridging-Header.h";
 			};
 			name = Release;
