@@ -17,8 +17,8 @@
 
 // Enter your CloudCherry Username and Password
 
-var _USERNAME = "rohith"
-var _PASSWORD = "Test@123"
+var _USERNAME = "retail"
+var _PASSWORD = "Cloudcherry@123"
 
 import UIKit
 
@@ -57,17 +57,17 @@ class CCSplashViewController: UIViewController {
         // Setting View Background
         
         
-        let aBackgroundImageView = UIImageView(frame: UIScreen.mainScreen().bounds)
+        let aBackgroundImageView = UIImageView(frame: UIScreen.main.bounds)
         aBackgroundImageView.image = UIImage(named: "HomeScreenBG")
         
-        self.view.insertSubview(aBackgroundImageView, atIndex: 0)
+        self.view.insertSubview(aBackgroundImageView, at: 0)
         
         
         // Adding Top White Line
         
         
         let aWhiteLine = UIView(frame: CGRect(x: 50, y: 50, width: self.view.frame.width - 100, height: 1))
-        aWhiteLine.backgroundColor = UIColor.whiteColor()
+        aWhiteLine.backgroundColor = UIColor.white
         
         self.view.addSubview(aWhiteLine)
         
@@ -75,17 +75,17 @@ class CCSplashViewController: UIViewController {
         // Adding Option Buttons for Static/Dynamic Initalizaiton
         
         
-        staticTokenToggleLabel = UILabel(frame: CGRect(x: 20, y: CGRectGetMaxY(aWhiteLine.frame) + 25, width: self.view.frame.width - 40, height: 20))
-        staticTokenToggleLabel.font = UIFont.systemFontOfSize(15)
-        staticTokenToggleLabel.textColor = UIColor.whiteColor()
+        staticTokenToggleLabel = UILabel(frame: CGRect(x: 20, y: aWhiteLine.frame.maxY + 25, width: self.view.frame.width - 40, height: 20))
+        staticTokenToggleLabel.font = UIFont.systemFont(ofSize: 15)
+        staticTokenToggleLabel.textColor = UIColor.white
         staticTokenToggleLabel.text = "Static Token - OFF"
         
         self.view.addSubview(staticTokenToggleLabel)
         
         
-        tokenToggleSwitch = UISwitch(frame: CGRect(x: self.view.frame.width - 70, y: CGRectGetMaxY(aWhiteLine.frame) + 20, width: 50, height: 20))
+        tokenToggleSwitch = UISwitch(frame: CGRect(x: self.view.frame.width - 70, y: aWhiteLine.frame.maxY + 20, width: 50, height: 20))
         tokenToggleSwitch.onTintColor = UIColor(red: 227/255, green: 99/255, blue: 109/255, alpha: 1.0)
-        tokenToggleSwitch.addTarget(self, action: #selector(CCSplashViewController.staticTokenSwitchToggled(_:)), forControlEvents: .ValueChanged)
+        tokenToggleSwitch.addTarget(self, action: #selector(CCSplashViewController.staticTokenSwitchToggled(_:)), for: .valueChanged)
         
         self.view.addSubview(tokenToggleSwitch)
         
@@ -98,13 +98,13 @@ class CCSplashViewController: UIViewController {
         let aSurveyButtonXAlign: CGFloat = (self.view.frame.size.width - 200) / 2
         let aSurveyButtonYAlign: CGFloat = (self.view.frame.size.height - 50) / 2
         
-        let aSurveyStartButton = UIButton(type: .Custom)
+        let aSurveyStartButton = UIButton(type: .custom)
         aSurveyStartButton.frame = CGRect(x: aSurveyButtonXAlign, y: aSurveyButtonYAlign, width: 200, height: 50)
-        aSurveyStartButton.layer.borderColor = UIColor.whiteColor().CGColor
+        aSurveyStartButton.layer.borderColor = UIColor.white.cgColor
         aSurveyStartButton.layer.borderWidth = 1.0
         aSurveyStartButton.layer.cornerRadius = 25
-        aSurveyStartButton.setTitle("START SURVEY", forState: .Normal)
-        aSurveyStartButton.addTarget(self, action: #selector(CCSplashViewController.surveyStartButtonTapped), forControlEvents: .TouchUpInside)
+        aSurveyStartButton.setTitle("START SURVEY", for: UIControlState())
+        aSurveyStartButton.addTarget(self, action: #selector(CCSplashViewController.surveyStartButtonTapped), for: .touchUpInside)
         
         self.view.addSubview(aSurveyStartButton)
         
@@ -121,7 +121,7 @@ class CCSplashViewController: UIViewController {
     // MARK: - Touches Method
     
     
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         
         self.view.endEditing(true)
         
@@ -135,24 +135,30 @@ class CCSplashViewController: UIViewController {
         
         self.view.endEditing(true)
         
-        if (tokenToggleSwitch.on) {
+        if (tokenToggleSwitch.isOn) {
             
             if (staticTokenTextField.text == "") {
                 
-                let anAlert = UIAlertController(title: "Alert", message: "Please enter a valid Static Token", preferredStyle: .Alert)
-                anAlert.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
-                self.presentViewController(anAlert, animated: true, completion: nil)
+                let anAlert = UIAlertController(title: "Alert", message: "Please enter a valid Static Token", preferredStyle: .alert)
+                anAlert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                self.present(anAlert, animated: true, completion: nil)
                 
             } else {
                 
-                SurveyCC().setStaticToken(staticTokenTextField.text!)
-                SurveyCC().showSurveyInController(self)
+                SurveyCC().initialise(_USERNAME, iPassword: _PASSWORD, iToken: staticTokenTextField.text!)
+                SurveyCC().setConfig(1, iLocation: "Chennai")
+                SurveyCC().showSurveyInController(self, iToThrottle: true)
                 
             }
             
         } else {
+            let aConfig = SurveyConfig()
+            aConfig.numberOfUses = 1
+            aConfig.location = "Chennai"
+            SurveyCC().initialise(_USERNAME, iPassword: _PASSWORD, iTokenConfig: aConfig)
             
-            SurveyCC().setCredentials(_USERNAME, iPassword: _PASSWORD)
+            let aUniqueId: NSDictionary = ["email" : "vishal.chandran@wowlabz.com"]
+            SurveyCC().setUniqueId(aUniqueId)
             
             let anUnselectedStarImage = UIImage(named: "StarOff")!
             let aSelectedStarImage = UIImage(named: "StarOn")!
@@ -169,33 +175,33 @@ class CCSplashViewController: UIViewController {
             
             var aPrefillDictionary = Dictionary<String, AnyObject>()
             
-            aPrefillDictionary = ["prefillEmail" : "abc@gmail.com", "prefillMobile" : "9900990000"]
+            aPrefillDictionary = ["prefillEmail" : "abc@gmail.com" as AnyObject, "prefillMobile" : "9900990000" as AnyObject]
             
             SurveyCC().setCustomSmileyRatingAssets(anUnselectedSmileyImages, iSmileySelectedAssets: aSelectedSmileyImages)
             SurveyCC().setCustomStarRatingAssets(anUnselectedStarImage, iStarSelectedAsset: aSelectedStarImage)
             SurveyCC().setPrefill(aPrefillDictionary)
             SurveyCC().setCustomTextStyle(.CC_RECTANGLE)
-            SurveyCC().showSurveyInController(self)
+            SurveyCC().showSurveyInController(self, iToThrottle: true)
             
         }
         
     }
     
     
-    func staticTokenSwitchToggled(iSwitch: UISwitch) {
+    func staticTokenSwitchToggled(_ iSwitch: UISwitch) {
         
-        if (iSwitch.on) {
+        if (iSwitch.isOn) {
             
             staticTokenToggleLabel.text = "Static Token - ON"
             
-            staticTokenTextField = UITextField(frame: CGRect(x: 20, y: CGRectGetMaxY(staticTokenToggleLabel.frame) + 15, width: self.view.frame.width - 40, height: 20))
+            staticTokenTextField = UITextField(frame: CGRect(x: 20, y: staticTokenToggleLabel.frame.maxY + 15, width: self.view.frame.width - 40, height: 20))
             staticTokenTextField.attributedPlaceholder = NSAttributedString(string:"Enter Static Token",
-                                                                             attributes:[NSForegroundColorAttributeName: UIColor.whiteColor()])
-            staticTokenTextField.textColor = UIColor.whiteColor()
+                                                                             attributes:[NSForegroundColorAttributeName: UIColor.white])
+            staticTokenTextField.textColor = UIColor.white
             
             let aBottomBorder = CALayer()
             let aWidth = CGFloat(1.0)
-            aBottomBorder.borderColor = UIColor.whiteColor().CGColor
+            aBottomBorder.borderColor = UIColor.white.cgColor
             aBottomBorder.frame = CGRect(x: 0, y: staticTokenTextField.frame.size.height - aWidth, width: staticTokenTextField.frame.size.width, height: staticTokenTextField.frame.size.height)
             
             aBottomBorder.borderWidth = aWidth
