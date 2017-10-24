@@ -226,8 +226,9 @@ class CCSplashViewController: UIViewController, SurveyCCDelegate {
     // MARK: - SurveyCCDelegate Method
     
     
-    func surveyExited(withStatus iStatus: SurveyExitedAt) {
+    func surveyExited(withStatus iStatus: SurveyExitedAt, andSurveyToken iSurveyToken: String) {
         // Handle Survey Exit here
+        print(iSurveyToken)
     }
 
 }
