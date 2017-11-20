@@ -23,7 +23,7 @@ var _PASSWORD = "Cloudcherry@123"
 import UIKit
 
 
-class CCSplashViewController: UIViewController {
+class CCSplashViewController: UIViewController, SurveyCCDelegate {
     
     
     // MARK: - Variables
@@ -144,10 +144,11 @@ class CCSplashViewController: UIViewController {
                 self.present(anAlert, animated: true, completion: nil)
                 
             } else {
-                
-                SurveyCC().initialise(_USERNAME, iPassword: _PASSWORD, iToken: staticTokenTextField.text!)
-                SurveyCC().setConfig(1, iLocation: "Chennai")
-                SurveyCC().showSurveyInController(self, iToThrottle: true)
+                let aSurveyCC = SurveyCC()
+                aSurveyCC.initialise(_USERNAME, iPassword: _PASSWORD, iToken: staticTokenTextField.text!)
+                aSurveyCC.setConfig(1, iLocation: "Chennai")
+                aSurveyCC.surveyDelegate = self
+                aSurveyCC.showSurveyInController(self, iToThrottle: true)
                 
             }
             
@@ -177,11 +178,13 @@ class CCSplashViewController: UIViewController {
             
             aPrefillDictionary = ["prefillEmail" : "abc@gmail.com" as AnyObject, "prefillMobile" : "9900990000" as AnyObject]
             
-            SurveyCC().setCustomSmileyRatingAssets(anUnselectedSmileyImages, iSmileySelectedAssets: aSelectedSmileyImages)
-            SurveyCC().setCustomStarRatingAssets(anUnselectedStarImage, iStarSelectedAsset: aSelectedStarImage)
-            SurveyCC().setPrefill(aPrefillDictionary)
-            SurveyCC().setCustomTextStyle(.CC_RECTANGLE)
-            SurveyCC().showSurveyInController(self, iToThrottle: true)
+            let aSurveyCC = SurveyCC()
+            aSurveyCC.setCustomSmileyRatingAssets(anUnselectedSmileyImages, iSmileySelectedAssets: aSelectedSmileyImages)
+            aSurveyCC.setCustomStarRatingAssets(anUnselectedStarImage, iStarSelectedAsset: aSelectedStarImage)
+            aSurveyCC.setPrefill(aPrefillDictionary)
+            aSurveyCC.setCustomTextStyle(.CC_RECTANGLE)
+            aSurveyCC.surveyDelegate = self
+            aSurveyCC.showSurveyInController(self, iToThrottle: true)
             
         }
         
@@ -213,11 +216,19 @@ class CCSplashViewController: UIViewController {
         } else {
             
             staticTokenToggleLabel.text = "Static Token - OFF"
-            
             staticTokenTextField.removeFromSuperview()
             
         }
         
+    }
+    
+    
+    // MARK: - SurveyCCDelegate Method
+    
+    
+    func surveyExited(withStatus iStatus: SurveyExitedAt, andSurveyToken iSurveyToken: String) {
+        // Handle Survey Exit here
+        print(iSurveyToken)
     }
 
 }
